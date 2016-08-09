@@ -1,8 +1,9 @@
 # Shrednought ZSH Theme
+# TODO:(@bigolu) the way the amp cord color gets toggled is super ineffecient and should be revised.
 
 PROMPT='
-%{$fg[gray]%}$(amp_cord_1)$(git_prompt_info)%n% %{$fg[blue]%}:%{$reset_color%}$(host_name)%c
-$(amp_cord_2)🎸 %{$reset_color%}'
+%{$fg[gray]%}$(amp_cord ╭─)$(git_prompt_info)%n% %{$fg[blue]%}:%{$reset_color%}$(host_name)%c
+$(amp_cord ╰)🎸 %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%}:%{$reset_color%}"
@@ -18,22 +19,26 @@ host_name() {
     fi
 }
 
+# return true if git branch is clean and false otherwise
+# logic borrowed from Josh Matthew's ezprompt (https://github.com/jmatth/ezprompt)
 git_is_clean() {
     STATUS=`git status 2>&1 | tee`
     clean=`echo -n "${STATUS}" 2> /dev/null | grep "clean" &> /dev/null; echo "$?"`
+    MODIFIED=`echo -n "${STATUS}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
+    deleted=`echo -n "${STATUS}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
 
-    if [ "${clean}" = "0" ]; then
+    if [ "${clean}" = "0" ] && [ "${MODIFIED}" != "0" ] && [ "${deleted}" != "0" ]; then
         return 0
     else
         return 1 
     fi
-    
 }
 
-amp_cord_1() {
-    if git_is_clean $1; then echo "%{$fg[green]%}╭─%{$reset_color%}"; else echo "%{$fg[red]%}╭─%{$reset_color%}"; fi
-}
-
-amp_cord_2() {
-    if git_is_clean $1; then echo "%{$fg[green]%}╰%{$reset_color%}"; else echo "%{$fg[red]%}╰%{$reset_color%}"; fi
+# proper colors for the amp cord in my prompt
+amp_cord() {
+    if git rev-parse --git-dir > /dev/null 2>&1; then
+        if git_is_clean; then echo "%{$fg[green]%}$1%{$reset_color%}"; else echo "%{$fg[red]%}$1%{$reset_color%}"; fi
+    else
+        echo "%{$fg[gray]%}$1%{$reset_color%}";
+    fi
 }
