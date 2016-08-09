@@ -2,8 +2,8 @@
 # TODO:(@bigolu) the way the amp cord color gets toggled is super ineffecient and should be revised.
 
 PROMPT='
-%{$fg[gray]%}$(amp_cord ╭─)$(git_prompt_info)%n% %{$fg[blue]%}:%{$reset_color%}$(host_name)%c
-$(amp_cord ╰)🎸 %{$reset_color%}'
+%{$fg[gray]%}$(git_color_code ╭─)$(git_prompt_info)%n% %{$fg[blue]%}:%{$reset_color%}$(host_name)%c
+$(git_color_code ╰)🎸 %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%}:%{$reset_color%}"
@@ -34,8 +34,8 @@ git_is_clean() {
     fi
 }
 
-# proper colors for the amp cord in my prompt
-amp_cord() {
+# change color of arg based on state of git branch
+git_color_code() {
     if git rev-parse --git-dir > /dev/null 2>&1; then
         if git_is_clean; then echo "%{$fg[green]%}$1%{$reset_color%}"; else echo "%{$fg[red]%}$1%{$reset_color%}"; fi
     else
