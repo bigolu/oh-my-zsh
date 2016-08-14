@@ -1,7 +1,5 @@
-# custom files
-custom/
-!custom/plugins/example
-!custom/example.zsh
+# secrets
+custom/creds.zsh
 
 # temp files directories
 cache/
