@@ -6,6 +6,7 @@ alias s="sudo "
 alias rm='trash-put'
 
 # git
+alias gp="git pull"
 alias gs="git status --short"
 alias gss="git status"
 alias gc="git commit"
