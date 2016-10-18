@@ -1,5 +1,4 @@
 # Shrednought ZSH Theme
-# TODO:(@bigolu) the way the amp cord color gets toggled is super ineffecient and should be revised.
 
 PROMPT='
 %{$fg[gray]%}$(git_color_code ╭─)$(git_prompt_info)%n% $(host_name)%{$fg[blue]%}:%{$reset_color%}%c
