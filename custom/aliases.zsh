@@ -1,9 +1,12 @@
 # misc
 alias c="clear"
-alias wifi="sudo service network-manager restart"
 alias la="ls -A"
 alias s="sudo "
 alias rm='trash-put'
+alias reset-spotlight='sudo mdutil -a -i off && 
+  sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist && 
+  sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist && 
+  sudo mdutil -a -i on'
 
 # git
 alias gp="git pull"
@@ -12,14 +15,6 @@ alias gss="git status"
 alias gc="git commit"
 alias gitall="git add -A"
 alias ga="git add"
-
-# apt-get
-alias aptdate='sudo apt-get update'
-alias aptgrade='sudo apt-get upgrade'
-alias aptstall='sudo apt-get install'
-alias aptautorm='sudo apt-get autoremove'
-alias aptrm='sudo apt-get remove'
-alias aptsearch='apt-cache search'
 
 # perform 'ls' after 'cd' if successful.
 cdls() {
