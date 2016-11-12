@@ -1,6 +1,5 @@
 # misc
 alias c="clear"
-alias wifi="sudo service network-manager restart"
 alias la="ls -A"
 alias s="sudo "
 alias rm='trash-put'
