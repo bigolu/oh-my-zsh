@@ -16,6 +16,10 @@ alias gc="git commit"
 alias gitall="git add -A"
 alias ga="git add"
 
+# make
+alias mc="make clean"
+alias m="make"
+
 # perform 'ls' after 'cd' if successful.
 cdls() {
   builtin cd "$*"
